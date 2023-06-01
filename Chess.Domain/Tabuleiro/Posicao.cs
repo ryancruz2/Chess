@@ -1,5 +1,5 @@
-﻿namespace Chess.tabuleiro;
-class Posicao
+﻿namespace Chess.Domain.Tabuleiro;
+public class Posicao
 {
     public int line { get; set; }
     public int column { get; set; }

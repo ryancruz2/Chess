@@ -1,1 +1,1 @@
-﻿global using Chess.tabuleiro;
+﻿global using Chess.Domain.Tabuleiro;
