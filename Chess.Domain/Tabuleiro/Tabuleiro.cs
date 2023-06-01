@@ -12,6 +12,10 @@ public class Tabuleiro
         pecas = new Peca[linha,colunas];
     }
 
+    public void colocarPeca(Peca p, Posicao pos )
+    {
+        pecas[pos.line,pos.column] = p;
+    }
     public Peca peca(int linha, int colunas)
     {
         return pecas[linha, colunas];
