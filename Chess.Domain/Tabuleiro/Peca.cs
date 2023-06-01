@@ -13,9 +13,4 @@ public class Peca
         this.tab = tab;
         this.qteMovimentos = 0;
     }
-
-    public Peca peca(int linha, int colunas)
-    {
-        return peca(linha, colunas);
-    }
 }
