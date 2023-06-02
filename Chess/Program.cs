@@ -3,18 +3,22 @@ using Chess.Domain.Exceptions;
 
 try
 {
-    Tabuleiro tab = new(8, 8);
+ PartidaDeXadrez partida = new PartidaDeXadrez();
 
-    tab.colocarPeca(new Torre(tab, Cor.Branca), new Posicao(0, 0));
-    tab.colocarPeca(new Torre(tab, Cor.Branca), new Posicao(0, 7));
-    tab.colocarPeca(new Rei(tab, Cor.Branca), new Posicao(0, 2));
+    
 
-    tab.colocarPeca(new Torre(tab, Cor.Preta), new Posicao(7, 7));
-    tab.colocarPeca(new Torre(tab, Cor.Preta), new Posicao(7, 0));
-    tab.colocarPeca(new Rei(tab, Cor.Preta), new Posicao(7, 3));
+    while (!partida.terminada)
+    {
+        Console.Clear();
+        Tela.ImprimirTabuleiro(partida.tab);
+        
+        Console.Write("Origem: ");
+        Posicao origem = Tela.lerPosicaoXadrez().ToPosicao();
 
-    Tela.ImprimirTabuleiro(tab);
-
+        Console.Write("Destino: ");
+        Posicao destino = Tela.lerPosicaoXadrez().ToPosicao();
+        partida.executaMovimento(origem, destino);
+    }
     //PosicaoXadrez pos = new('c', 7);
     //Console.WriteLine(pos);
     //Console.WriteLine(pos.ToPosicao());

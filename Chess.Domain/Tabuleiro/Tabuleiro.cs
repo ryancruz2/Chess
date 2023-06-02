@@ -5,7 +5,7 @@ public class Tabuleiro
 {
     public int linhas { get; set; }
     public int colunas { get; set; }
-    private Peca[,] pecas;
+    private Peca?[,] pecas;
 
     public Tabuleiro(int linha, int colunas)
     {
@@ -14,11 +14,20 @@ public class Tabuleiro
         pecas = new Peca[linha, colunas];
     }
 
-    public Peca peca(Posicao pos) => pecas[pos.line, pos.column];
-    public Peca peca(int linha, int colunas) => pecas[linha, colunas];
+    public Peca? peca(Posicao pos) => pecas[pos.line, pos.column];
+    public Peca? peca(int linha, int colunas) => pecas[linha, colunas]!;
     public bool posicaoValida(Posicao pos) => !(pos.line < 0 || pos.line >= this.linhas || pos.column < 0 || pos.column >= this.colunas);
+    
+    public Peca? retirarPeca(Posicao pos)
+    {
+        if (peca(pos) == null)
+            return null;
 
-
+        Peca aux = peca(pos);
+        aux.posicao = null;
+        pecas[pos.line, pos.column] = null;
+        return aux;
+    }
     public bool existePeca(Posicao pos)
     {
         validarPosicao(pos);
