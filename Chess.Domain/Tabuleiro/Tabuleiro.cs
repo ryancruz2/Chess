@@ -1,4 +1,6 @@
-﻿namespace Chess.Domain.Tabuleiro;
+﻿global using Chess.Domain.Exceptions;
+
+namespace Chess.Domain.Tabuleiro;
 public class Tabuleiro
 {
     public int linhas { get; set; }
@@ -9,15 +11,34 @@ public class Tabuleiro
     {
         this.linhas = linha;
         this.colunas = colunas;
-        pecas = new Peca[linha,colunas];
+        pecas = new Peca[linha, colunas];
     }
 
-    public void colocarPeca(Peca p, Posicao pos )
+    public Peca peca(Posicao pos) => pecas[pos.line, pos.column];
+    public Peca peca(int linha, int colunas) => pecas[linha, colunas];
+    public bool posicaoValida(Posicao pos)
     {
-        pecas[pos.line,pos.column] = p;
+        if (pos.line < 0 || pos.line >= this.linhas || pos.column < 0 || pos.column >= this.colunas)
+            return false;
+        return true;
     }
-    public Peca peca(int linha, int colunas)
+    public bool existePeca(Posicao pos)
     {
-        return pecas[linha, colunas];
+        validarPosicao(pos);
+        return peca(pos) != null;
+    }
+    public void validarPosicao(Posicao pos)
+    {
+        if (!posicaoValida(pos))
+            throw new TabuleiroException("Posição Invalida");
+    }
+
+    public void colocarPeca(Peca p, Posicao pos)
+    {
+        if (existePeca(pos))
+            throw new TabuleiroException("Já existe uma peça nessa posição");
+
+        pecas[pos.line, pos.column] = p;
+        p.posicao = pos;
     }
 }
