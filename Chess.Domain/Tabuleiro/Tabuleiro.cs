@@ -16,12 +16,9 @@ public class Tabuleiro
 
     public Peca peca(Posicao pos) => pecas[pos.line, pos.column];
     public Peca peca(int linha, int colunas) => pecas[linha, colunas];
-    public bool posicaoValida(Posicao pos)
-    {
-        if (pos.line < 0 || pos.line >= this.linhas || pos.column < 0 || pos.column >= this.colunas)
-            return false;
-        return true;
-    }
+    public bool posicaoValida(Posicao pos) => !(pos.line < 0 || pos.line >= this.linhas || pos.column < 0 || pos.column >= this.colunas);
+
+
     public bool existePeca(Posicao pos)
     {
         validarPosicao(pos);
